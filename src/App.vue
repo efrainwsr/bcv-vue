@@ -5,7 +5,7 @@
   const bcvPrice = ref(0);
 
    const obtenerBcv = onMounted( async ()=>{
-   const { data } = await axios.get('https://api-bcv.vercel.app/bcv');
+   const { data } = await axios.get('https://bcv-api.vercel.app/bcv');
    console.log(data);
    bcvPrice.value = data.usd;
 
