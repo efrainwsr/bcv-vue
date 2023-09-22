@@ -1,16 +1,17 @@
 <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted,computed } from 'vue'
   import axios from 'axios'
   const url = 'https://bcv-api.vercel.app/bcv';
-  const urlMenu = 'http://localhost:3000/menu';
+  const urlMenu = 'https://bcv-api.vercel.app/menu';
 
   const bcvPrice = ref(0);
   const menu = ref(0);
+  const precioBS = ref(0);
 
    const obtenerBcv = onMounted( async ()=>{
    const { data } = await axios.get(url);
    console.log(data);
-   bcvPrice.value = data.usd;
+   bcvPrice.value = data;
   })
 
    const getMenu = onMounted( async ()=>{
@@ -18,16 +19,131 @@
     menu.value = data;
     console.log(data)
 
+  /*  menu.value.forEach((item) => {
+      let aux = bcvPrice.value(item.precio);
+      item.bs = aux.toFixed(2)
+    });*/
+
    })
+
+
+      
+
 </script>
 
 <template>
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Restaurante</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+    <section id="menu">
+        <h2>Menú</h2>
+        <div class="plato" v-for="item in menu">
+            <div class="plato-info">
+                <h3>{{item.nombre}} {{item.desc}}</h3>
+            </div>
+            <div class="precio">
+                <span>{{item.precio}}$ - {{item.precio*bcvPrice.toFixed(2)}}</span>
+            </div>
+        </div>
+        <p>{{bcvPrice}}</p>
+    </section>
+</body>
+</html>
+
+
+
+  <!--
   <div>
-    <h1>Precio del BCV</h1>
-    <p>{{ bcvPrice }}</p>
+    <h1>Tasa BCV {{bcvPrice}}</h1>
     <div v-for="item in menu">
       <p>{{item.nombre}} {{item.desc}} Precio: {{item.precio}}$</p>
     </div>
-  </div>
+  </div>-->
 </template>
+
+
+<style scoped>
+  /* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Estilos para las secciones */
+/* Estilos para las secciones */
+section {
+    padding: 40px;
+}
+
+#menu .plato {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.plato-info h3,
+.plato-info p {
+    margin: 0;
+    margin-right: 20px;
+}
+
+.precio span {
+    font-weight: bold;
+    color: #ff6600;
+}
+
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        margin-top: 20px;
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+
+    section {
+        padding: 20px;
+    }
+}
+
+</style>
   
