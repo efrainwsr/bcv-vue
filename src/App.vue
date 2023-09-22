@@ -44,16 +44,20 @@
 <body>
     <section id="menu">
         <h2>Menú</h2>
-        <div class="plato" v-for="item in menu">
-            <div class="plato-info">
-                <h3>{{item.nombre}} {{item.desc}}</h3>
-            </div>
-            <div class="precio">
-                <span>{{item.precio}}$ - {{(item.precio * bcvPrice).toFixed(2)}}</span>
-            </div>
-        </div>
-        <h2 class="bcvPrice">{{bcvPrice}}</h2>
+<table>
+<tr>
+   <th>Producto</th>
+   <th>Precio $</th>
+   <th>Precio Bs.</th>
+</tr>
+  <tr v-for="item in menu">
+    <td>{{item.nombre}} {{item.desc}}</td>
+    <td>{{item.precio}}</td>
+    <td>{{(item.precio * bcvPrice).toFixed(2)}}</td>
+  </tr>
+</table>
     </section>
+<h2>{{bcvPrice}}</h2>
 </body>
 </html>
 
