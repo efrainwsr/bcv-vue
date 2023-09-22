@@ -52,7 +52,7 @@
                 <span>{{item.precio}}$ - {{(item.precio * bcvPrice).toFixed(2)}}</span>
             </div>
         </div>
-        <p>{{bcvPrice}}</p>
+        <h2 class="bcvPrice">{{bcvPrice}}</h2>
     </section>
 </body>
 </html>
@@ -77,6 +77,10 @@ body {
     padding: 0;
 }
 
+.bcvPrice {
+  margin-top: 15px ;
+}
+
 header {
     background-color: #333;
     color: #fff;
@@ -94,6 +98,8 @@ nav ul {
 nav ul li {
     margin-right: 20px;
 }
+
+
 
 nav ul li a {
     color: #fff;
