@@ -1,8 +1,8 @@
 <script setup>
   import { ref, onMounted,computed } from 'vue'
   import axios from 'axios'
-  const url = 'https://bcv-api.vercel.app/bcv';
-  const urlMenu = 'https://bcv-api.vercel.app/menu';
+  const url = 'https://bcv-apiv2.vercel.app/bcv';
+  const urlMenu = 'https://bcv-apiv2.vercel.app/menu';
 
   const bcvPrice = ref(0);
   const menu = ref(0);
@@ -11,7 +11,7 @@
    const obtenerBcv = onMounted( async ()=>{
    const { data } = await axios.get(url);
    console.log(data);
-   bcvPrice.value = data;
+   bcvPrice.value = data.usd;
   })
 
    const getMenu = onMounted( async ()=>{
@@ -49,7 +49,7 @@
                 <h3>{{item.nombre}} {{item.desc}}</h3>
             </div>
             <div class="precio">
-                <span>{{item.precio}}$ - {{item.precio*bcvPrice.toFixed(2)}}</span>
+                <span>{{item.precio}}$ - {{(item.precio * bcvPrice).toFixed(2)}}</span>
             </div>
         </div>
         <p>{{bcvPrice}}</p>
