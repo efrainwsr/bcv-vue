@@ -67,6 +67,7 @@
         </table>
         <h2 class="bcvPrice">{{bcvPrice}} Bs.</h2>
     </section>
+<h2>{{bcvPrice}}</h2>
 </body>
 </html>
 
