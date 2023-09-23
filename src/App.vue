@@ -6,8 +6,7 @@
 
   const bcvPrice = ref(0);
   const menu = ref(0);
-  const precioBS = ref(0);
-
+  
    const obtenerBcv = onMounted( async ()=>{
    const { data } = await axios.get(url);
    console.log(data);
@@ -38,21 +37,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carta de Restaurante</title>
-    <link rel="stylesheet" href="estilos.css">
+    <!--<link rel="stylesheet" href="estilos.css">-->
 </head>
 
 <body>
     <section id="menu">
         <h2>Menú</h2>
-        <div class="plato" v-for="item in menu">
-            <div class="plato-info">
-                <h3>{{item.nombre}} {{item.desc}}</h3>
-            </div>
-            <div class="precio">
-                <span>{{item.precio}}$ - {{(item.precio * bcvPrice).toFixed(2)}}</span>
-            </div>
-        </div>
-        <h2 class="bcvPrice">{{bcvPrice}}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Plato</th>
+                    <th>Precio</th>
+                    <th>Bs</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in menu">
+                    <td>
+                        <h4>{{item.nombre.toUpperCase()}} {{item.desc.toUpperCase()}}</h4>
+                    </td>
+                    <td>
+                        <span>{{item.precio}} $</span>
+                    </td>
+                    <td class="alinear-derecha">
+                        <span>{{(item.precio * bcvPrice).toFixed(2)}} Bs.</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="bcvPrice">{{bcvPrice}} Bs.</h2>
     </section>
 </body>
 </html>
@@ -76,6 +89,25 @@ body {
     margin: 0;
     padding: 0;
 }
+
+
+table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+       .alinear-derecha{
+        text-align: right;
+       }
+
+        th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
 
 .bcvPrice {
   margin-top: 15px ;
@@ -111,25 +143,6 @@ nav ul li a {
 section {
     padding: 40px;
 }
-
-#menu .plato {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.plato-info h3,
-.plato-info p {
-    margin: 0;
-    margin-right: 20px;
-}
-
-.precio span {
-    font-weight: bold;
-    color: #ff6600;
-}
-
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
