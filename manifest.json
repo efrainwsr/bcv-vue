@@ -63,7 +63,7 @@
       }
     ],
     "serviceworker": {
-      "src": "/src/registerServiceWorker.js"
+      "src": "/public/srvice-worker.ks"
     }
   }
   
